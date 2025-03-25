@@ -16,38 +16,40 @@
 <body>
 <!-- Script to handle the time inputs -->
   <script>
-    // Log to confirm the script is running
-    console.log("Script is running in timetest.html");
+    // Wait for the DOM to fully load
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("DOM fully loaded. Running script...");
 
-    // Select all elements with the class 'time-input'
-    const timeInputs = document.querySelectorAll('.time-input');
+      // Select all elements with the class 'time-input'
+      const timeInputs = document.querySelectorAll('.time-input');
 
-    // Log the number of time-input elements found
-    console.log("Number of time-input elements found:", timeInputs.length);
+      // Log the number of time-input elements found
+      console.log("Number of time-input elements found:", timeInputs.length);
 
-    timeInputs.forEach(input => {
-      // Add change event listener to each time input
-      input.addEventListener('change', function () {
-        const selectedTime = this.value;
-        const inputId = this.id;
+      timeInputs.forEach(input => {
+        // Add change event listener to each time input
+        input.addEventListener('change', function () {
+          const selectedTime = this.value;
+          const inputId = this.id;
 
-        // Log the selected time and input ID
-        console.log("Time input changed:");
-        console.log("Input ID:", inputId);
-        console.log("Selected Time:", selectedTime);
+          // Log the selected time and input ID
+          console.log("Time input changed:");
+          console.log("Input ID:", inputId);
+          console.log("Selected Time:", selectedTime);
 
-        // Send the data to the parent window
-        try {
-          window.parent.postMessage({ id: inputId, time: selectedTime }, '*');
-          console.log("Message sent to parent:", { id: inputId, time: selectedTime });
-        } catch (error) {
-          console.error("Error sending message to parent:", error);
-        }
+          // Send the data to the parent window
+          try {
+            window.parent.postMessage({ id: inputId, time: selectedTime }, '*');
+            console.log("Message sent to parent:", { id: inputId, time: selectedTime });
+          } catch (error) {
+            console.error("Error sending message to parent:", error);
+          }
+        });
       });
     });
   </script>
 
-<table style="border-collapse: collapse; width: 100%; border-style: solid; border-color: #red;" border="10">
+<table style="border-collapse: collapse; width: 100%; border-style: solid; border-color: red;" border="10">
 <tbody>
 <tr>
 <td style="width: 100%; border-style: none;">
