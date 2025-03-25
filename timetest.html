@@ -1,3 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Test</title>
+  <style>
+    /* Optional: Add styling for time inputs */
+    .time-input {
+      margin: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+<!-- Script to handle the time inputs -->
+  <script>
+    // Select all elements with the class 'time-input'
+    document.querySelectorAll('.time-input').forEach(input => {
+      input.addEventListener('change', function () {
+        const selectedTime = this.value;
+        const inputId = this.id;
+
+        // Send the data to the parent window
+        window.parent.postMessage({ id: inputId, time: selectedTime }, '*');
+      });
+    });
+  </script>
+
 <table style="border-collapse: collapse; width: 100%; border-style: solid; border-color: #e1f1ff;" border="10">
 <tbody>
 <tr>
@@ -146,3 +176,5 @@
 </table>
 <p> </p>
 <p> </p>
+</body>
+</html>
