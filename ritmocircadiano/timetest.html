@@ -22,10 +22,10 @@
     }
 	
 	/*  Formato del timepicker  con placeholder en movil*/
-/* For most modern browsers */
-/*  input[type="time"]::-webkit-calendar-picker-indicator {display: none;}*/
+	/* For most modern browsers */
+	/*  input[type="time"]::-webkit-calendar-picker-indicator {display: none;}*/
 
-input[type="time"] {
+	input[type="time"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: scrollbarbutton-up ;
@@ -90,7 +90,79 @@ input[type="time"] {
         });
       });
     });
-  </script>
+</script> 
+  
+<!-- Second script for handling checkboxes -->
+<!-- Add this in your HTML head or just before your script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOMContentLoaded event fired."); // Check if script is running
+
+  const fields = [
+    { timeInputId: 'a13', checkboxName: 'a13_no' },
+    { timeInputId: 'a14', checkboxName: 'a14_no' },
+    { timeInputId: 'a15', checkboxName: 'a15_no' },
+    { timeInputId: 'a16', checkboxName: 'a16_no' },
+    { timeInputId: 'a17', checkboxName: 'a17_no' },
+    { timeInputId: 'a18', checkboxName: 'a18_no' },
+    { timeInputId: 'a21', checkboxName: 'a21_no' },
+  ];
+
+  function toggleTimeInput(field) {
+    console.log(`toggleTimeInput called for: ${field.timeInputId}`);
+
+    const checkbox = $(`input[name="${field.checkboxName}"]`);
+    const timeInput = $(`#${field.timeInputId}`);
+    const errorMessage = timeInput.siblings('.error-message'); 
+
+    if (checkbox.length === 0) {
+      console.warn(`Checkbox with name '${field.checkboxName}' not found.`);
+    }
+
+    if (timeInput.length === 0) {
+      console.warn(`Time input with id '${field.timeInputId}' not found.`);
+    }
+
+    console.log(`Checkbox is checked: ${checkbox.is(':checked')}`);
+
+    if (checkbox.is(':checked')) {
+      console.log(`Hiding time input: ${field.timeInputId}`);
+      timeInput.hide().val(''); 
+      errorMessage.css('color', 'white'); 
+    } else {
+      console.log(`Showing time input: ${field.timeInputId}`);
+      timeInput.show();
+      errorMessage.css('color', 'red'); 
+    }
+  }
+
+  fields.forEach(field => {
+    console.log(`Setting up field: ${field.timeInputId}`);
+
+    toggleTimeInput(field); // Set initial visibility
+
+    const checkbox = $(`input[name="${field.checkboxName}"]`);
+    
+    if (checkbox.length > 0) {
+      console.log(`Adding change event listener for checkbox: ${field.checkboxName}`);
+      checkbox.on('change', function () { // Use direct event binding
+        console.log(`Checkbox ${field.checkboxName} changed.`);
+        toggleTimeInput(field);
+      });
+    } else {
+      console.warn(`Checkbox '${field.checkboxName}' not found.`);
+    }
+  });
+
+  console.log("Script setup completed.");
+});
+ 
+
+ </script> 
+  
+  
 
 <table style="border-collapse: collapse; width: 100.75%; border-style: none none none solid; border-color: #e1f1ff;" border="10" > 
 <tbody>
@@ -155,7 +227,7 @@ input[type="time"] {
   <option value="12:00">
   <option value="13:00"></td>
 <td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
-<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a13_no"></div>
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" name="a13_no" id="checkbox_a13_no"></div>
 <div style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
 </td>
 </tr>
@@ -174,7 +246,7 @@ input[type="time"] {
   <option value="18:00">
   </td>
 <td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
-<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a14_no"></div>
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" name="a14_no" id="checkbox_a14_no"></div>
 <div style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
 </td>
 </tr>
@@ -193,7 +265,7 @@ input[type="time"] {
   <option value="18:00">
   </td>
 <td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
-<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a15_no"></div>
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" name="a15_no" id="checkbox_a15_no"></div>
 <div style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
 </td>
 </tr>
@@ -211,7 +283,7 @@ input[type="time"] {
   <option value="20:00">
   </td>
 <td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
-<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a16_no"></div>
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" name="a16_no" id="checkbox_a16_no"></div>
 <div style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
 </td>
 </tr>
@@ -232,7 +304,7 @@ input[type="time"] {
   <option value="03:00">
 </td>
 <td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
-<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a17_no"></div>
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" name="a17_no" id="checkbox_a17_no"></div>
 <div style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
 </td>
 </tr>
@@ -253,7 +325,7 @@ input[type="time"] {
   <option value="03:00">
 </td>
 <td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
-<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a18_no"></div>
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" name="a18_no" id="checkbox_a18_no"></div>
 <div style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
 </td>
 </tr>
