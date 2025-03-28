@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Test</title>
+  <style>
+    /* Optional: Add styling for time inputs */
+    .time-input {
+      margin: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+	
+	/*  Formato del timepicker  con placeholder en movil*/
+/* For most modern browsers */
+/*  input[type="time"]::-webkit-calendar-picker-indicator {display: none;}*/
+
+input[type="time"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: scrollbarbutton-up ;
+    border: 1px solid #cfe2f3;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #000;
+    position: relative;
+    margin: 3px;
+  }
+
+  /* Hide the placeholder by default */
+  input[type="time"]::before {
+    content: '';
+  }
+
+  @media (max-width: 768px) {
+	input[type="time"] {
+        width: 100%;
+        max-width: 80px;
+        min-width: 70px;
+    }
+    input[type="time"]::before {
+      content: attr(data-placeholder);
+      color: #aaa;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* Hide the placeholder if a class is added to indicate input */
+    input[type="time"].has-value::before {
+      content: '';
+    }
+  }
+	
+	
+  </style>
+</head>
+<body>
+<!-- Script to handle the time inputs -->
+  <script>
+    // Wait for the DOM to fully load
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("DOM fully loaded. Running script...");
+
+      // Select all elements with the class 'time-input'
+      const timeInputs = document.querySelectorAll('.time-input');
+
+      // Log the number of time-input elements found
+      console.log("Number of time-input elements found:", timeInputs.length);
+
+      timeInputs.forEach(input => {
+        // Add change event listener to each time input
+        input.addEventListener('change', function () {
+          const selectedTime = this.value;
+          const inputId = this.id;
+
+          // Log the selected time and input ID
+          console.log("Time input changed:");
+          console.log("Input ID:", inputId);
+          console.log("Selected Time:", selectedTime);
+
+          // Send the data to the parent window
+          try {
+            window.parent.postMessage({ id: inputId, time: selectedTime }, '*');
+            console.log("Message sent to parent:", { id: inputId, time: selectedTime });
+          } catch (error) {
+            console.error("Error sending message to parent:", error);
+          }
+        });
+      });
+    });
+  </script>
+
+<table style="border-collapse: collapse; width: 100.75%; border-style: none none none solid; border-color: #e1f1ff;" border="10" > 
+<tbody>
+<tr style="height: 72px;">
+<td style="width: 8.24646%; height: 72px; border-color: #ecf0f1; border-style: none;"> </td>
+<td style="vertical-align: bottom; width: 28.038%; height: 72px; border-color: #ecf0f1; border-style: none;">¿A qué hora...</td>
+<td style="width: 32.0865%; height: 72px; border-color: #ecf0f1; border-style: none;"><span style="color: #ffffff;">-</span></td>
+<td style="width: 31.6361%; height: 72px; text-align: center; border-color: #ecf0f1; border-style: none;"><span style="font-weight: 600;">Marque esta casilla para indicar que normalmente <br /><strong>NO</strong> realiza esta comida<br /><i class="fa-solid fa-arrow-down fa-xl"></i></span></td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\wake-up_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">se despierta? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a10" class="time-input" type="time" data-placeholder="00:00 🕔" list="wake-times"/></span>
+<datalist id="wake-times" step="900">
+  <option value="05:00">
+  <option value="06:00">
+  <option value="07:00">
+  <option value="08:00">
+  <option value="09:00">
+  <option value="10:00">
+  <option value="11:00">
+  <option value="12:00">
+  <option value="13:00">
+</datalist></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"> </div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img style="transform: scaleX(-1);" src="imgs\man-eating_stroke6_blue_64.png" alt="" width="45" height="45" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">realiza la primera comida del día? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a12" class="time-input" type="time" data-placeholder="00:00 🕔" list="first-meal-times"/></span>
+<datalist id="first-meal-times" step="900">
+  <option value="05:00">
+  <option value="06:00">
+  <option value="07:00">
+  <option value="08:00">
+  <option value="09:00">
+  <option value="10:00">
+  <option value="11:00">
+  <option value="12:00">
+  <option value="13:00">
+</datalist></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"> </div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\breakfast_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">desayuna? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a13" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a13_no"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted none; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\sandwich_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">toma un aperitivo o un tentempié de media mañana? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a14" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a14_no"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\salad_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">come? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a15" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a15_no"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\cake_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">merienda? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a16" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a16_no"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\soup_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">cena? </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a17" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a17_no"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\apple_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">come por última vez antes de irse a dormir (recena)?  </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a18" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"><input type="checkbox" id="a18_no"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 59px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; border-color: #ecf0f1; border-style: none; height: 59px;"><img src="imgs\sleepless_crop_erase_blue_64.png" alt="" width="55" height="55" /></td>
+<td style="width: 28.038%; border-color: #ecf0f1; border-style: none; height: 59px;"><span style="font-weight: normal;">se acuesta?</span></td>
+<td style="width: 32.0865%; border-color: #ecf0f1; border-style: none; height: 59px; text-align: center;"><span style="font-weight: normal;"><input id="a19" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; text-align: center; border-color: #ecf0f1; border-style: none; height: 59px; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"> </div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+<tr style="height: 54px; border-color: #e1f1ff; border-style: none none dotted; border-width: 5pt;">
+<td style="width: 8.24646%; height: 54px; border-color: #ecf0f1; border-style: none;"><img src="imgs\slumber_blue_64.png" alt="" width="50" height="50" /></td>
+<td style="width: 28.038%; height: 54px; border-color: #ecf0f1; border-style: none;"><span style="font-weight: normal;">se duerme? (<em>aproximadamente</em>) </span></td>
+<td style="width: 32.0865%; height: 54px; border-color: #ecf0f1; border-style: none; text-align: center;"><span style="font-weight: normal;"><input id="a20" class="time-input" type="time" data-placeholder="00:00 🕔" /></span></td>
+<td style="width: 31.6361%; height: 54px; text-align: center; border-color: #ecf0f1; border-style: none; position: relative;">
+<div style="padding: 10px; position: relative; z-index: 2;"> </div>
+<div style="position: absolute; top: 0; bottom: 0; left: 49%; transform: translateX(-50%); width: 25px; background-color: #e1f1ff; z-index: 1;"> </div>
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
