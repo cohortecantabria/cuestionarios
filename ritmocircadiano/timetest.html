@@ -21,7 +21,7 @@
       font-size: 16px;
     }
 	
-	/*  Formato del timepicker  con placeholder en movil*/
+	/*  Formato del timepicker con placeholder en movil*/
 	/* For most modern browsers */
 	/*  input[type="time"]::-webkit-calendar-picker-indicator {display: none;}*/
 
@@ -98,7 +98,6 @@
 
 <script>
  document.addEventListener('DOMContentLoaded', function () {
-  console.log("DOMContentLoaded event fired."); // Check if script is running
 
   const fields = [
     { timeInputId: 'a13', checkboxName: 'a13_no' },
@@ -107,48 +106,31 @@
     { timeInputId: 'a16', checkboxName: 'a16_no' },
     { timeInputId: 'a17', checkboxName: 'a17_no' },
     { timeInputId: 'a18', checkboxName: 'a18_no' },
-    { timeInputId: 'a21', checkboxName: 'a21_no' },
   ];
 
   function toggleTimeInput(field) {
-    console.log(`toggleTimeInput called for: ${field.timeInputId}`);
-
+   
     const checkbox = $(`input[name="${field.checkboxName}"]`);
     const timeInput = $(`#${field.timeInputId}`);
     const errorMessage = timeInput.siblings('.error-message'); 
 
-    if (checkbox.length === 0) {
-      console.warn(`Checkbox with name '${field.checkboxName}' not found.`);
-    }
-
-    if (timeInput.length === 0) {
-      console.warn(`Time input with id '${field.timeInputId}' not found.`);
-    }
-
-    console.log(`Checkbox is checked: ${checkbox.is(':checked')}`);
-
     if (checkbox.is(':checked')) {
-      console.log(`Hiding time input: ${field.timeInputId}`);
       timeInput.hide().val(''); 
       errorMessage.css('color', 'white'); 
     } else {
-      console.log(`Showing time input: ${field.timeInputId}`);
       timeInput.show();
       errorMessage.css('color', 'red'); 
     }
   }
 
   fields.forEach(field => {
-    console.log(`Setting up field: ${field.timeInputId}`);
-
+  
     toggleTimeInput(field); // Set initial visibility
 
     const checkbox = $(`input[name="${field.checkboxName}"]`);
     
     if (checkbox.length > 0) {
-      console.log(`Adding change event listener for checkbox: ${field.checkboxName}`);
       checkbox.on('change', function () { // Use direct event binding
-        console.log(`Checkbox ${field.checkboxName} changed.`);
         toggleTimeInput(field);
       });
     } else {
@@ -156,7 +138,6 @@
     }
   });
 
-  console.log("Script setup completed.");
 });
  
 
