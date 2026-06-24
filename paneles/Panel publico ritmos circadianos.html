@@ -210,11 +210,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 chartInstance.data.labels = laborablesLevels;
             }
             
-            // Actualizar etiquetas para los gráficos rc-smart-chart-id16 y rc-smart-chart-id17
-            if (canvasId === 'rc-smart-chart-id13') {
-                chartInstance.data.labels = apneaLevels;
-            }
-
             // Actualizar etiquetas para los gráficos rc-smart-chart-id16, rc-smart-chart-id18, rc-smart-chart-id19, rc-smart-chart-id20, rc-smart-chart-id21
             if (canvasId === 'rc-smart-chart-id18' || canvasId === 'rc-smart-chart-id19' || canvasId === 'rc-smart-chart-id20' || canvasId === 'rc-smart-chart-id21' || canvasId === 'rc-smart-chart-id22' ) {
                 chartInstance.data.labels = bebidasLevels;
