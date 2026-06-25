@@ -200,28 +200,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            // Actualizar solo las etiquetas del eje X para los gráficos y rc-smart-chart-id3
-            if (canvasId === 'rc-smart-chart-id5') {
-                chartInstance.data.labels = matutinaLevels;
-            }
-
-            // Actualizar etiquetas para los gráficos rc-smart-chart-id8
-            if (canvasId === 'rc-smart-chart-id10') {
-                chartInstance.data.labels = laborablesLevels;
-            }
-            
+                        
             // Actualizar etiquetas para los gráficos rc-smart-chart-id16, rc-smart-chart-id18, rc-smart-chart-id19, rc-smart-chart-id20, rc-smart-chart-id21
             if (canvasId === 'rc-smart-chart-id18' || canvasId === 'rc-smart-chart-id19' || canvasId === 'rc-smart-chart-id20' || canvasId === 'rc-smart-chart-id21' || canvasId === 'rc-smart-chart-id22' ) {
                 chartInstance.data.labels = bebidasLevels;
             }
 
-            if (canvasId === 'rc-smart-chart-id37') {
-                chartInstance.data.labels = horasLevels;
-            }
-
-            if (canvasId === 'rc-smart-chart-id38') {
-                chartInstance.data.labels = turnosLevels;
-            }
 
             // Ocultar solo el título del eje X sin modificar otras configuraciones
             if (chartInstance.options.scales && chartInstance.options.scales.y) {
